@@ -1,0 +1,17 @@
+.output-section {
+    padding: 50px 250px;
+    p {
+        text-align: center;text-transform: capitalize;font-weight: bold;font-size: 1.8em;
+    }
+    .header {
+        border: .5px solid black;
+        padding: 15px;margin-bottom: 5px;
+    }
+    .data{
+        border: .5px solid black;
+        padding: 15px;margin-bottom: 5px;
+        word-wrap: break-word;line-height: 30px;
+
+
+    }
+}
