@@ -10,7 +10,6 @@
     "@mui/joy": "^5.0.0-alpha.35",
     "@mui/material": "^5.8.7",
     "@mui/styled-engine-sc": "^5.8.0",
-    "@mui/styles": "^5.9.3",
     "@react-spring/web": "^9.5.0",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
