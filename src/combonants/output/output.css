@@ -1,0 +1,40 @@
+.output-section {
+  padding: 50px 250px;
+}
+
+.output-section p {
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1.8em;
+}
+
+.output-section .header {
+  border: .5px solid black;
+  padding: 15px;
+  margin-bottom: 5px;
+}
+
+.output-section .data {
+  border: .5px solid black;
+  padding: 15px;
+  margin-bottom: 5px;
+  word-wrap: break-word;
+  line-height: 30px;
+}
+
+.output-section .status {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 300px;
+  font-size: .7em;
+  padding: 15px 5px;
+}
+/*# sourceMappingURL=output.css.map */

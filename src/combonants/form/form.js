@@ -12,6 +12,10 @@ import axios from 'axios';
 function Form({dataPrint}) {
   const [value,setvalue]=useState('https://swapi.dev/api/people/1/')
   const [method, setmethod] = React.useState('get');
+  const [bodyTextStatus,setbodyTextStatus]=useState(false);
+  const [bodyValue,setBodyvalue]=useState()
+
+
 
 
   const handleChange=(e)=>{
@@ -20,27 +24,53 @@ function Form({dataPrint}) {
 
   const handleChange2 = (event, data) => {
     setmethod(data);
+    (data=="post"||data=="put")?setbodyTextStatus(true):setbodyTextStatus(false)
   };
 
   const gotoLink=async()=>{
-    let dataUse
-    if(method=="get"){
-      const data=await axios.get(value)
-      dataUse=data
-    }else if(method=="post"){
-      const data=await axios.post(value)
-      dataUse=data
-    }else if (method=="delete"){
-      const data=await axios.delete(value)
-      dataUse=data
-    }
-    else {
-      const data=await axios.put(value)
-      dataUse=data
-    }
 
-    dataPrint(dataUse)
+
+    //----------------------------   Get Section------------------------------------// 
+    if(method=="get"){
+      try {
+        let data=await axios.get(value)
+         dataPrint(data)
+      }catch(err){
+        dataPrint(err.response)
+      }
+    }
+    //--------------------------------post Section ---------------------------------//    
+    else if(method==="post"){
+      try{
+        let  data=await axios.post(value,bodyValue)
+         dataPrint(data)
+      }catch(err){
+        dataPrint(err.response)
+      }
+    }
+    //--------------------------------delete section ---------------------------------//
+    else if (method=="delete"){
+      try{
+        let data=await axios.delete(value)
+        dataPrint(data)
+      }catch(err){
+        dataPrint(err.response)
+      }
+    }
+    //-------------------------------put value section ------------------------------//
+    else {
+      try{
+        let data=await axios.put(value,bodyValue)
+        dataPrint(data)
+      }catch(err){
+        dataPrint(err.response)
+      }
+    }
   
+  }
+
+  const GetTextBody=(e)=>{
+    setBodyvalue(e.target.value)
   }
 
 
@@ -52,6 +82,7 @@ function Form({dataPrint}) {
                     label="Insert The Url Here ..........."
                     value={value}
                     style={{width:"100%"}}
+                    data-testid="url"
                     onChange={handleChange}
                   />
 
@@ -63,15 +94,30 @@ function Form({dataPrint}) {
                         onChange={handleChange2}
                         style={{width:"60%"}}
                       >
-                        <ToggleButton value="get" className='toggel-button'>GET</ToggleButton>
-                        <ToggleButton value="post" className='toggel-button'>POST</ToggleButton>
-                        <ToggleButton value="delete" className='toggel-button'>DELETE</ToggleButton>
-                        <ToggleButton value="put" className='toggel-button'>PUT</ToggleButton>
+                        <ToggleButton value="get" className='toggel-button' data-testid="get">GET</ToggleButton>
+                        <ToggleButton value="post" className='toggel-button' data-testid="post">POST</ToggleButton>
+                        <ToggleButton value="delete" className='toggel-button' data-testid="delete">DELETE</ToggleButton>
+                        <ToggleButton value="put" className='toggel-button' data-testid="put">PUT</ToggleButton>
                       </ToggleButtonGroup>
 
+                      <p data-testid="methodType">{method}</p>
 
-                      <Button variant="contained" onClick={gotoLink}>Go To Link ..</Button>
+                      <Button variant="contained" onClick={gotoLink} data-testid="submitSection">Go To Link ..</Button>
                   </div>
+
+                   {
+                    bodyTextStatus!==false?
+                        <TextField
+                        id="outlined-multiline-static"
+                        label="Input The Body Here "
+                        multiline
+                        rows={4}
+                        sx={{width:"100%",marginTop:"15px"}}
+                        onChange={GetTextBody}
+                      />:<></>
+                   }
+
+
         </div>
   )
 }
