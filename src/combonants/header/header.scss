@@ -1,11 +1,15 @@
+body {
+    width: 100vw;overflow-x: hidden;
+}
 .header-container {
     width: 100vw;color: white;
     background-color: black;
     text-align: center;font-size: 1.5em;padding: 10px;
+    
 }
 
 .text-filed {
-    padding: 10px 250px;width: 100%;
+    margin: 50px 250px;
 }
 
 
