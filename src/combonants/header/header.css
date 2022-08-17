@@ -1,3 +1,8 @@
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 .header-container {
   width: 100vw;
   color: white;
@@ -8,8 +13,7 @@
 }
 
 .text-filed {
-  padding: 10px 250px;
-  width: 100%;
+  margin: 50px 250px;
 }
 
 .form-button {

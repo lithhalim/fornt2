@@ -1,19 +1,41 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 
+import Modal_section from '../modal/modal';
+import {addToHistory,RemoveFromHistory, ClearHistory} from "../form/reducerFuction"
 
 
+const intialstate={
+  count:0,
+  history:[]
+}
+function reducer(state,action){
+  switch(action.type){
+    case "addToHestory":{
+       return addToHistory(state,action);
+    }
+    case "removeFromHistory":{
+      return RemoveFromHistory(state,action);
+    }
+    case "clearAllHistory":{
+      return ClearHistory()
+    }
+  }
+}
 
 
 function Form({dataPrint}) {
+  const [select,dispatch]=useReducer(reducer,intialstate)
   const [value,setvalue]=useState('https://swapi.dev/api/people/1/')
   const [method, setmethod] = React.useState('get');
   const [bodyTextStatus,setbodyTextStatus]=useState(false);
-  const [bodyValue,setBodyvalue]=useState()
+  const [bodyValue,setBodyvalue]=useState();
+
+
 
 
 
@@ -66,6 +88,8 @@ function Form({dataPrint}) {
         dataPrint(err.response)
       }
     }
+
+    dispatch({type:"addToHestory",payload:{method:method,value:value,id:Date.now()}})
   
   }
 
@@ -75,9 +99,9 @@ function Form({dataPrint}) {
 
 
 
-
   return (
         <div className='text-filed'>
+          <Modal_section dispatch={dispatch}  select={select}/>
                 <TextField
                     label="Insert The Url Here ..........."
                     value={value}
@@ -123,3 +147,5 @@ function Form({dataPrint}) {
 }
 
 export default Form
+
+
