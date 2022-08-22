@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react'
+import React, { useContext, useReducer, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -6,7 +6,11 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 
 import Modal_section from '../modal/modal';
-import {addToHistory,RemoveFromHistory, ClearHistory} from "../form/reducerFuction"
+import {addToHistory,RemoveFromHistory, ClearHistory} from "../form/reducerFuction";
+
+
+//its comin gfrom create context to mack acsess to state directly
+import { Color_Change_context } from '../context/color-change-context';
 
 
 const intialstate={
@@ -34,6 +38,11 @@ function Form({dataPrint}) {
   const [method, setmethod] = React.useState('get');
   const [bodyTextStatus,setbodyTextStatus]=useState(false);
   const [bodyValue,setBodyvalue]=useState();
+
+  const changing_color=useContext(Color_Change_context);
+
+  console.log(changing_color.color)
+
 
 
 
@@ -99,9 +108,12 @@ function Form({dataPrint}) {
 
 
 
+
   return (
         <div className='text-filed'>
+          <Button variant="contained" onClick={changing_color.toggelTheme} >change Color</Button>
           <Modal_section dispatch={dispatch}  select={select}/>
+
                 <TextField
                     label="Insert The Url Here ..........."
                     value={value}
